@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
@@ -22,9 +19,37 @@ function App() {
 
       <section id="center">
         <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+          <svg className="hero-gem" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="gem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"    stopColor="#ff0000"/>
+                <stop offset="16%"   stopColor="#ff8800"/>
+                <stop offset="33%"   stopColor="#ffdd00"/>
+                <stop offset="50%"   stopColor="#00cc44"/>
+                <stop offset="67%"   stopColor="#0088ff"/>
+                <stop offset="83%"   stopColor="#9900ff"/>
+                <stop offset="100%"  stopColor="#ff0000"/>
+              </linearGradient>
+              <filter id="gem-glow">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#gem-glow)" stroke="url(#gem-grad)" fill="none">
+              <polygon points="100,6 194,100 100,194 6,100"    strokeWidth="1.5"/>
+              <polygon points="100,28 172,100 100,172 28,100"  strokeWidth="1.5" opacity="0.75"/>
+              <polygon points="100,50 150,100 100,150 50,100"  strokeWidth="1.5" opacity="0.5"/>
+              <polygon points="100,72 128,100 100,128 72,100"  strokeWidth="1.5" opacity="0.3"/>
+              <line x1="100" y1="6"   x2="100" y2="194" strokeWidth="0.5" opacity="0.2"/>
+              <line x1="6"   y1="100" x2="194" y2="100" strokeWidth="0.5" opacity="0.2"/>
+              <line x1="29"  y1="29"  x2="171" y2="171" strokeWidth="0.5" opacity="0.2"/>
+              <line x1="171" y1="29"  x2="29"  y2="171" strokeWidth="0.5" opacity="0.2"/>
+              <circle cx="100" cy="100" r="5" fill="url(#gem-grad)" strokeWidth="0"/>
+            </g>
+          </svg>
         </div>
         <div>
           <h1>Ciao! Sono culetto</h1>
