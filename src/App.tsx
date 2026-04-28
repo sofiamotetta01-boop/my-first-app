@@ -27,7 +27,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Ciao! Sono Sofia</h1>
+          <h1>Ciao! Sono culetto</h1>
           <p>
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
