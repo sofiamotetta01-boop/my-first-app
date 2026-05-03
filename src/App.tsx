@@ -74,9 +74,9 @@ export default function App() {
           {flyingMessage && (
             <motion.div
               key="flying"
-              initial={{ opacity: 1, y: 0 }}
-              animate={{ opacity: 0, y: -80 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              initial={{ opacity: 1, y: 0, rotate: 0 }}
+              animate={{ opacity: 0, y: -200, rotate: 15 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 10 }}
               onAnimationComplete={() => setFlyingMessage(null)}
               style={{
                 pointerEvents: 'none',
@@ -98,7 +98,7 @@ export default function App() {
               key={m.id}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{ borderTop: '1px solid #ccc', padding: '12px 0' }}
             >
               <strong>{m.name}</strong>
