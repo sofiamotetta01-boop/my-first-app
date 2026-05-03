@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from './supabase'
 
 type Message = {
@@ -13,6 +14,7 @@ export default function App() {
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
+  const [flyingMessage, setFlyingMessage] = useState<string | null>(null)
 
   // Load all messages when the page first opens
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function App() {
       return
     }
     if (data) setMessages([data as Message, ...messages])
+    setFlyingMessage(text)
     setName('')
     setText('')
   }
@@ -67,15 +70,43 @@ export default function App() {
         <button type="submit" disabled={loading || text.length > 200}>
           {loading ? 'Saving…' : 'Sign'}
         </button>
+        <AnimatePresence>
+          {flyingMessage && (
+            <motion.div
+              key="flying"
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 0, y: -80 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              onAnimationComplete={() => setFlyingMessage(null)}
+              style={{
+                pointerEvents: 'none',
+                fontSize: 14,
+                background: '#f0f0f0',
+                padding: '8px 12px',
+                borderRadius: 6,
+              }}
+            >
+              {flyingMessage}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </form>
       <ul style={{ listStyle: 'none', padding: 0 }}>
-        {messages.map(m => (
-          <li key={m.id} style={{ borderTop: '1px solid #ccc', padding: '12px 0' }}>
-            <strong>{m.name}</strong>
-            <div>{m.message}</div>
-            <small>{new Date(m.created_at).toLocaleString()}</small>
-          </li>
-        ))}
+        <AnimatePresence>
+          {messages.map(m => (
+            <motion.li
+              key={m.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              style={{ borderTop: '1px solid #ccc', padding: '12px 0' }}
+            >
+              <strong>{m.name}</strong>
+              <div>{m.message}</div>
+              <small>{new Date(m.created_at).toLocaleString()}</small>
+            </motion.li>
+          ))}
+        </AnimatePresence>
       </ul>
     </div>
   )
