@@ -59,7 +59,12 @@ export default function App() {
           onChange={e => setText(e.target.value)}
           rows={3}
         />
-        <button type="submit" disabled={loading}>
+        {text.length > 0 && (
+          <span style={{ textAlign: 'right', fontSize: 12, color: text.length > 200 ? 'red' : 'inherit' }}>
+            {text.length} / 200
+          </span>
+        )}
+        <button type="submit" disabled={loading || text.length > 200}>
           {loading ? 'Saving…' : 'Sign'}
         </button>
       </form>
